@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Soil Fertility Classification</title>
+    <style>
+        img, video, canvas {
+            width: 300px;
+            margin: 10px;
+        }
+        .result {
+            font-size: 1.2rem;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <h2>Upload or Click Soil Image</h2>
+
+    <!-- Local Upload Form -->
+    <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="image" required>
+        <button style="background-color: blue;"  type="submit">Upload & Predict</button>
+    </form>
+
+    <!-- Webcam Interface -->
+    <div>
+        <video id="video" autoplay></video><br>
+        <button id="snap">Capture & Predict</button>
+        <canvas id="canvas" style="display: none;"></canvas>
+    </div>
+
+    <!-- Result Display -->
+    {% if image_url %}
+        <h3>Uploaded Image:</h3>
+        <img src="{{ image_url }}">
+        <p class="result">Prediction: {{ prediction }}</p>
+    {% endif %}
+    <div id="webcam-result" class="result"></div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
